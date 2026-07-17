@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pushdown Automata</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <main id="exam-root" class="site-shell"></main>
+    <script>
+      window.examData = {
+        slug: "pda",
+        title: "Pushdown Automata",
+        sectionNumber: "1.9",
+        summary:
+          "A pushdown automaton extends finite-state behavior with a stack, which gives it memory for nested and mirrored structure. Its instantaneous description (q, w, s) records the current state, the unread input, and the current stack contents. PDA transitions can read input, inspect the stack top, and push or pop symbols. Because of that extra stack memory, PDAs can recognize classic context-free patterns such as balanced structures and palindromes, with acceptance defined by final state, empty stack, or both depending on the formal setup.",
+        questions: [
+          {
+            id: "pda-q01",
+            prompt: "In the instantaneous description (q, w, s), the component w denotes",
+            options: ["the unread input", "the already processed input", "the stack alphabet", "the set of final states"],
+            correctIndex: 0,
+            explanation: "The middle component of the ID is the part of the input that has not yet been consumed.",
+            difficulty: "foundational",
+            assetKey: "pda-machine-8"
+          },
+          {
+            id: "pda-q02",
+            prompt: "In the same ID notation, the component s denotes",
+            options: ["the start symbol", "the stack contents", "the input alphabet", "the output sequence"],
+            correctIndex: 1,
+            explanation: "The third component records what is currently stored on the stack.",
+            difficulty: "foundational"
+          },
+          {
+            id: "pda-q03",
+            prompt: "What additional memory feature gives a PDA more power than a DFA?",
+            options: ["a second tape", "a stack", "a product state", "a parse tree"],
+            correctIndex: 1,
+            explanation: "The stack is the key memory structure that distinguishes PDAs from DFAs.",
+            difficulty: "foundational"
+          },
+          {
+            id: "pda-q04",
+            prompt: "A PDA transition may inspect and modify",
+            options: ["the top of the stack", "every stack symbol at once", "the entire future input", "the full parse tree"],
+            correctIndex: 0,
+            explanation: "Standard PDA moves work with the current state, the next input symbol if any, and the top stack symbol.",
+            difficulty: "foundational"
+          },
+          {
+            id: "pda-q05",
+            prompt: "The empty move in PDA notation is commonly written as",
+            options: ["ε or λ", "Γ", "Δ", "∩"],
+            correctIndex: 0,
+            explanation: "Both ε and λ are standard symbols for an empty input or empty stack action in many notes.",
+            difficulty: "foundational"
+          },
+          {
+            id: "pda-q06",
+            prompt: "Which language type is most classically associated with PDA recognition?",
+            options: ["context-free languages", "finite decimal expansions only", "Type-3 languages only", "Moore output languages"],
+            correctIndex: 0,
+            explanation: "PDAs are the machine model corresponding to context-free languages.",
+            difficulty: "foundational"
+          },
+          {
+            id: "pda-q07",
+            prompt: "In Machine 8, the transition λ, λ; Z from q1 to q2 most naturally serves to",
+            options: ["place the bottom stack marker before reading the main input", "accept the string immediately", "erase the tape", "move into a reject state"],
+            correctIndex: 0,
+            explanation: "That transition initializes the stack with a base marker Z before the push/pop work begins.",
+            difficulty: "application"
+          },
+          {
+            id: "pda-q08",
+            prompt: "In Machine 8, the loops on q2 labeled with a and b most directly indicate",
+            options: ["pushing the first half of the observed symbols onto the stack", "popping matching symbols immediately", "rejecting all mixed strings", "converting the machine into a DFA"],
+            correctIndex: 0,
+            explanation: "The q2 loops read symbols and place matching markers on the stack, storing the first segment.",
+            difficulty: "application"
+          },
+          {
+            id: "pda-q09",
+            prompt: "What is the role of the λ, λ; λ move from q2 to q3 in Machine 8?",
+            options: ["It nondeterministically guesses the midpoint and switches from pushing to popping", "It marks acceptance by final state", "It duplicates the stack top", "It complements the language"],
+            correctIndex: 0,
+            explanation: "That empty move lets the PDA change phases without consuming input.",
+            difficulty: "application"
+          },
+          {
+            id: "pda-q10",
+            prompt: "The loops on q3 in Machine 8 are used to",
+            options: ["pop matching symbols while reading the second half of the string", "push more symbols for the first half", "simulate a Turing machine tape", "remove unreachable states"],
+            correctIndex: 0,
+            explanation: "In the second phase, the PDA compares incoming symbols against the stored stack symbols and pops them.",
+            difficulty: "application"
+          },
+          {
+            id: "pda-q11",
+            prompt: "What does the symbol Z represent in many PDA diagrams, including Machine 8?",
+            options: ["the bottom-of-stack marker", "the reject state", "the input alphabet", "a terminal-only variable"],
+            correctIndex: 0,
+            explanation: "Z is commonly used to mark the bottom of the stack so the machine can detect when matching is complete.",
+            difficulty: "application"
+          },
+          {
+            id: "pda-q12",
+            prompt: "Which string shape is the natural target of a PDA that pushes symbols for the first half and pops matching symbols for the second half?",
+            options: ["ww^R", "a*b*", "Σ*", "only prime-length strings"],
+            correctIndex: 0,
+            explanation: "That push-then-pop pattern is designed for mirror-image checking, as in even-length palindromes.",
+            difficulty: "application"
+          },
+          {
+            id: "pda-q13",
+            prompt: "Why can a PDA recognize balanced parentheses while a DFA generally cannot?",
+            options: ["Because the stack can keep track of arbitrarily deep nesting", "Because PDAs have infinitely many input symbols", "Because DFAs cannot read ε", "Because PDAs always guess the whole string first"],
+            correctIndex: 0,
+            explanation: "Balanced nesting requires memory that grows with depth, which the stack provides.",
+            difficulty: "application"
+          },
+          {
+            id: "pda-q14",
+            prompt: "Which acceptance convention is valid for PDAs in standard course treatments?",
+            options: ["by final state, by empty stack, or by both depending on definition", "only by final state and never by empty stack", "only by empty stack and never by state", "by output symbol 1"],
+            correctIndex: 0,
+            explanation: "Different formal definitions use different acceptance conventions, and all are standard if stated clearly.",
+            difficulty: "application"
+          },
+          {
+            id: "pda-q15",
+            prompt: "Suppose a PDA is in the popping phase and reads a symbol that does not match the current stack top. What is the expected consequence?",
+            options: ["That computation branch cannot continue successfully toward acceptance", "The machine automatically repairs the stack", "The PDA becomes a DFA", "The stack is ignored for the rest of the input"],
+            correctIndex: 0,
+            explanation: "If the match fails, the intended pop move is unavailable, so that run blocks or rejects.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "pda-q16",
+            prompt: "Why is the midpoint switch in palindrome-style PDAs often nondeterministic?",
+            options: ["Because the machine may need to choose when to stop pushing before it has seen the whole string", "Because stacks cannot store symbols deterministically", "Because PDAs cannot read input during popping", "Because balanced languages are never context-free"],
+            correctIndex: 0,
+            explanation: "The machine may need to guess the boundary between the first and second halves while scanning left to right.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "pda-q17",
+            prompt: "If a PDA can accept by empty stack, what does an empty stack usually signal at the end of a successful mirrored comparison?",
+            options: ["All stored obligations have been matched and removed", "The input alphabet changed to Γ", "The machine must restart from q0", "No input symbols were read"],
+            correctIndex: 0,
+            explanation: "An empty stack indicates that every pushed symbol has been matched by a corresponding pop.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "pda-q18",
+            prompt: "A student claims a PDA can remember an arbitrarily long prefix because it has infinitely many states. What is the better explanation?",
+            options: ["The unbounded memory comes from the stack depth, not from infinitely many finite-control states", "The claim is correct because every PDA has infinitely many named states", "The memory comes only from ε-transitions", "The prefix is stored in the input alphabet"],
+            correctIndex: 0,
+            explanation: "A PDA still has finitely many control states; the stack supplies the expandable memory.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "pda-q19",
+            prompt: "If a language needs matched nesting but no general tape rewriting, which machine model is usually the tightest fit?",
+            options: ["PDA", "Turing machine only", "Moore machine", "Product DFA"],
+            correctIndex: 0,
+            explanation: "Matched nesting is the classic setting where PDA power is sufficient and appropriate.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "pda-q20",
+            prompt: "Which statement best summarizes why Machine 8 belongs in the PDA topic rather than the DFA topic?",
+            options: ["Its transitions explicitly manipulate stack content while reading input", "It has more than three states", "It uses the symbols a and b", "It contains a final state"],
+            correctIndex: 0,
+            explanation: "The presence of push/pop stack actions is the defining feature that makes the machine a PDA.",
+            difficulty: "reasoning"
+          }
+        ]
+      };
+    </script>
+    <script src="./assets/quiz.js"></script>
+  </body>
+</html>

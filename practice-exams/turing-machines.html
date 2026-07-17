@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turing Machines</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <main id="exam-root" class="site-shell"></main>
+    <script>
+      window.examData = {
+        slug: "turing-machines",
+        title: "Turing Machines",
+        sectionNumber: "1.10",
+        summary:
+          "A Turing machine is the strongest standard model in the course because it can read, write, and revisit cells on an unbounded tape. Its 7-tuple includes states, an input alphabet, a tape alphabet Γ, a blank symbol, a transition function, and designated halting states. A transition reads the current tape symbol, writes a new symbol, moves left or right, and changes state. That ability to overwrite symbols and move back across earlier work is what places Turing machines above PDAs and finite automata in computational power.",
+        questions: [
+          {
+            id: "tm-q01",
+            prompt: "In a Turing machine's 7-tuple, Γ denotes",
+            options: ["the tape alphabet", "the set of parse trees", "the stack alphabet of a PDA", "the accepting-state list only"],
+            correctIndex: 0,
+            explanation: "Γ is the tape alphabet, which includes the input symbols and usually additional working symbols.",
+            difficulty: "foundational"
+          },
+          {
+            id: "tm-q02",
+            prompt: "What does the blank symbol represent on a Turing machine tape?",
+            options: ["unused tape cells", "the reject state", "a mandatory first input symbol", "a product state separator"],
+            correctIndex: 0,
+            explanation: "The blank fills the tape outside the written input and may also reappear after rewriting.",
+            difficulty: "foundational"
+          },
+          {
+            id: "tm-q03",
+            prompt: "The transition δ(q, a) = (p, y, R) means",
+            options: ["in state q reading a, write y, move right, and enter p", "in state p reading y, write a, and reject", "move right first, then choose any symbol", "erase the tape and return to q"],
+            correctIndex: 0,
+            explanation: "A TM transition specifies the next state, the symbol to write, and the head movement direction.",
+            difficulty: "foundational"
+          },
+          {
+            id: "tm-q04",
+            prompt: "Which ability does a Turing machine have that a PDA does not have in the standard model?",
+            options: ["rewriting symbols on a revisit-able tape", "reading input symbols", "having states", "accepting and rejecting"],
+            correctIndex: 0,
+            explanation: "The tape can be overwritten and revisited, which is more flexible than stack-only memory.",
+            difficulty: "foundational"
+          },
+          {
+            id: "tm-q05",
+            prompt: "A Turing machine head may move",
+            options: ["left or right", "right only", "down the parse tree", "to any tape cell in one jump"],
+            correctIndex: 0,
+            explanation: "In the standard introductory model, the head moves one cell left or right each step.",
+            difficulty: "foundational"
+          },
+          {
+            id: "tm-q06",
+            prompt: "Why do Turing machines sit above PDAs and finite automata in the usual power ordering?",
+            options: ["Because they have more flexible memory and tape rewriting ability", "Because they always use more states", "Because they never halt", "Because they avoid alphabets entirely"],
+            correctIndex: 0,
+            explanation: "Their computational strength comes from a writable tape and the ability to revisit earlier cells.",
+            difficulty: "foundational"
+          },
+          {
+            id: "tm-q07",
+            prompt: "Which ordering correctly compares the standard machine classes by power?",
+            options: ["FA ⊆ PDA ⊆ TM", "TM ⊆ PDA ⊆ FA", "PDA ⊆ FA ⊆ TM", "FA ⊆ TM ⊆ PDA"],
+            correctIndex: 0,
+            explanation: "Finite automata are weakest, PDAs are stronger, and Turing machines are strongest among the three.",
+            difficulty: "application"
+          },
+          {
+            id: "tm-q08",
+            prompt: "Why is the tape alphabet Γ usually larger than the input alphabet Σ?",
+            options: ["Because the machine may need extra marker symbols while computing", "Because Γ cannot contain input symbols", "Because Σ is only for PDAs", "Because TMs cannot read blanks"],
+            correctIndex: 0,
+            explanation: "Working symbols such as marks or separators are often needed in addition to the original input symbols.",
+            difficulty: "application"
+          },
+          {
+            id: "tm-q09",
+            prompt: "If a machine in state q0 reads 0 and uses the move (q1, x, R), what happens first on that cell?",
+            options: ["0 is overwritten by x", "the head moves right before writing", "the machine accepts immediately", "the next cell is erased"],
+            correctIndex: 0,
+            explanation: "The transition writes the replacement symbol on the current cell and then moves the head.",
+            difficulty: "application"
+          },
+          {
+            id: "tm-q10",
+            prompt: "What is the purpose of using a marker such as x or y on the tape?",
+            options: ["To remember that a symbol has already been processed", "To add a new accepting state", "To convert the TM into a Moore machine", "To eliminate blanks from Γ"],
+            correctIndex: 0,
+            explanation: "Markers let the machine distinguish fresh input from symbols it has already examined.",
+            difficulty: "application"
+          },
+          {
+            id: "tm-q11",
+            prompt: "If a TM reaches an explicit ACCEPT state, the computation",
+            options: ["halts and accepts the input", "must continue scanning to the right", "switches to a PDA", "restarts from the left end"],
+            correctIndex: 0,
+            explanation: "Accepting states are halting states by definition in the standard course model.",
+            difficulty: "application"
+          },
+          {
+            id: "tm-q12",
+            prompt: "Which statement best describes the role of the transition function in a TM?",
+            options: ["It tells the machine what to read, write, where to move, and what state to enter next", "It lists every accepted string explicitly", "It replaces the tape alphabet", "It stores the parse tree"],
+            correctIndex: 0,
+            explanation: "The transition function fully determines the step-by-step behavior of the machine.",
+            difficulty: "application"
+          },
+          {
+            id: "tm-q13",
+            prompt: "A machine that can revisit earlier tape cells is especially suited for tasks that require",
+            options: ["cross-checking distant parts of the input after marking earlier symbols", "output on transitions only", "grammar simplification only", "state-pair construction"],
+            correctIndex: 0,
+            explanation: "Revisiting earlier cells is what makes tape marking and later comparison possible.",
+            difficulty: "application"
+          },
+          {
+            id: "tm-q14",
+            prompt: "Why is a PDA not usually enough to simulate arbitrary tape rewriting directly?",
+            options: ["A stack gives only top access, while a TM can rewrite and revisit many positions on its tape", "A PDA has no states", "A PDA cannot read input symbols", "A PDA cannot ever reject"],
+            correctIndex: 0,
+            explanation: "The tape's editable two-way access is much richer than a single LIFO stack interface.",
+            difficulty: "application"
+          },
+          {
+            id: "tm-q15",
+            prompt: "Suppose a TM keeps moving right over 1s looking for the first blank. What kind of subtask is it most likely performing?",
+            options: ["Scanning to the end of the current written portion of the tape", "Checking ambiguity of a grammar", "Building a product automaton", "Popping a stack"],
+            correctIndex: 0,
+            explanation: "Moving right until a blank is a standard way to find the current end of a block of written symbols.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "tm-q16",
+            prompt: "If a transition writes the same symbol it just read, does that step still matter?",
+            options: ["Yes, because the state change and head movement may still advance the computation", "No, because only rewriting to a different symbol counts", "No, because the machine must halt instead", "Yes, but only for finite automata"],
+            correctIndex: 0,
+            explanation: "A TM step can be useful even without changing the symbol, since it may move and change state.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "tm-q17",
+            prompt: "Why are working markers helpful when checking a language like {0^n1^n | n ≥ 0} with a TM?",
+            options: ["They allow matched symbols to be marked off and revisited until all pairs are accounted for", "They remove the need for an alphabet", "They make the machine regular", "They force all moves to the right"],
+            correctIndex: 0,
+            explanation: "Marking processed symbols supports repeated passes that pair one region of the input with another.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "tm-q18",
+            prompt: "A student says 'A TM is just a DFA with a longer input string.' What is the key flaw?",
+            options: ["A TM has writable, reusable memory and bidirectional tape motion, which a DFA does not", "A TM has no input alphabet", "A DFA can already rewrite tape cells", "A TM cannot halt"],
+            correctIndex: 0,
+            explanation: "The major difference is computational memory and tape control, not input length.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "tm-q19",
+            prompt: "If a TM leaves the input region, writes a marker on a blank cell, and later returns, what does that show about its memory model?",
+            options: ["The tape extends beyond the original input and can be used as workspace", "The tape must remain read-only", "The machine has converted into a PDA", "Blank cells cannot be revisited"],
+            correctIndex: 0,
+            explanation: "Using formerly blank cells as workspace is one of the standard strengths of Turing machines.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "tm-q20",
+            prompt: "Which summary best captures the exam-level role of Turing machines in automata theory?",
+            options: ["They provide the broadest standard model in the course, using a writable tape and flexible movement to recognize languages beyond PDA power", "They are a special case of Moore machines with blanks", "They are identical to CFGs once converted to CNF", "They are useful only for finite languages"],
+            correctIndex: 0,
+            explanation: "That is the central reason Turing machines occupy the top of the course's machine hierarchy.",
+            difficulty: "reasoning"
+          }
+        ]
+      };
+    </script>
+    <script src="./assets/quiz.js"></script>
+  </body>
+</html>

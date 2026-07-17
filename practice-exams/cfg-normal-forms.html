@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CFG Simplification and Normal Forms</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <main id="exam-root" class="site-shell"></main>
+    <script>
+      window.examData = {
+        slug: "cfg-normal-forms",
+        title: "CFG Simplification and Normal Forms",
+        sectionNumber: "1.8",
+        summary:
+          "CFG simplification removes useless symbols, unit productions, and null productions while preserving the language, with separate care for ε when needed. Left recursion is often eliminated before top-down parsing or normal-form conversion. In Chomsky Normal Form, productions are limited to A → BC or A → a, while in Greibach Normal Form every production begins with a terminal, as in A → aα. These restrictions make proofs and parsing arguments cleaner without changing the essential language.",
+        questions: [
+          {
+            id: "cfg-q01",
+            prompt: "Which production shape is allowed in Chomsky Normal Form?",
+            options: ["A → BC", "A → BCD", "A → aB", "AB → a"],
+            correctIndex: 0,
+            explanation: "CNF allows only A → BC or A → a, aside from the standard special handling of ε if needed.",
+            difficulty: "foundational"
+          },
+          {
+            id: "cfg-q02",
+            prompt: "Which production shape best matches Greibach Normal Form?",
+            options: ["A → aα", "A → BC", "A → λ only", "AB → CD"],
+            correctIndex: 0,
+            explanation: "GNF requires each production to begin with a terminal symbol.",
+            difficulty: "foundational"
+          },
+          {
+            id: "cfg-q03",
+            prompt: "A unit production is a rule of the form",
+            options: ["A → B", "A → aB", "A → BC", "A → aa"],
+            correctIndex: 0,
+            explanation: "Unit productions rewrite one variable directly into another single variable.",
+            difficulty: "foundational"
+          },
+          {
+            id: "cfg-q04",
+            prompt: "A null production is a rule that produces",
+            options: ["two variables", "ε", "a terminal followed by a variable", "a product state"],
+            correctIndex: 1,
+            explanation: "Null productions generate the empty string ε.",
+            difficulty: "foundational"
+          },
+          {
+            id: "cfg-q05",
+            prompt: "Why are useless symbols removed during CFG simplification?",
+            options: ["Because they do not help generate terminal strings reachable from the start symbol", "Because CNF forbids variables entirely", "Because useless symbols always create ambiguity", "Because they belong only to regular grammars"],
+            correctIndex: 0,
+            explanation: "A useless symbol is either unreachable or non-generating, so it can be deleted without changing the language.",
+            difficulty: "foundational"
+          },
+          {
+            id: "cfg-q06",
+            prompt: "Immediate left recursion has the form",
+            options: ["A → Aα", "A → αA", "A → a", "A → BC only"],
+            correctIndex: 0,
+            explanation: "Immediate left recursion means the variable appears first on the right-hand side of its own production.",
+            difficulty: "foundational"
+          },
+          {
+            id: "cfg-q07",
+            prompt: "Which statement about CNF is correct?",
+            options: ["Every right-hand side has either two variables or one terminal", "Every production must start with a terminal", "Unit productions are required", "Only ambiguous grammars can be converted into CNF"],
+            correctIndex: 0,
+            explanation: "That is the defining restriction of CNF.",
+            difficulty: "application"
+          },
+          {
+            id: "cfg-q08",
+            prompt: "Why is GNF often discussed alongside top-down parsing ideas?",
+            options: ["Because each production begins with a terminal, aligning the derivation with the next input symbol", "Because GNF removes all variables", "Because GNF is the only form that can produce ε", "Because GNF turns CFGs into DFAs"],
+            correctIndex: 0,
+            explanation: "Starting with a terminal makes the grammar's expansion more closely match the consumed input.",
+            difficulty: "application"
+          },
+          {
+            id: "cfg-q09",
+            prompt: "If a grammar contains A → B and B → C, what kind of cleanup is needed before normal-form conversion?",
+            options: ["Trap-state elimination", "Unit-production removal", "Product construction", "TM tape marking"],
+            correctIndex: 1,
+            explanation: "A → B and B → C are unit productions, so they are removed during simplification.",
+            difficulty: "application"
+          },
+          {
+            id: "cfg-q10",
+            prompt: "What is the main purpose of eliminating left recursion before certain parsing approaches?",
+            options: ["To avoid immediate infinite recursive expansion in top-down parsing", "To make the grammar regular", "To remove all terminals", "To add stack memory"],
+            correctIndex: 0,
+            explanation: "Left-recursive rules can cause top-down procedures to expand forever without consuming input.",
+            difficulty: "application"
+          },
+          {
+            id: "cfg-q11",
+            prompt: "Suppose a variable can be reached from the start symbol but can never derive a terminal string. It is",
+            options: ["useful", "generating", "useless", "already in GNF"],
+            correctIndex: 2,
+            explanation: "A symbol that never generates terminal output is useless even if it is reachable.",
+            difficulty: "application"
+          },
+          {
+            id: "cfg-q12",
+            prompt: "Which restriction is true of CNF but not generally true of GNF?",
+            options: ["A right-hand side may consist of exactly two variables", "A production must begin with a terminal", "The grammar must be regular", "The grammar must accept by empty stack"],
+            correctIndex: 0,
+            explanation: "The two-variable pattern A → BC is the hallmark CNF binary rule.",
+            difficulty: "application"
+          },
+          {
+            id: "cfg-q13",
+            prompt: "Why is ε often treated as a special case during simplification and CNF conversion?",
+            options: ["Because preserving the empty string may require separate handling from the other productions", "Because ε is not part of formal language theory", "Because ε can appear only in Mealy machines", "Because CNF requires every variable to derive ε"],
+            correctIndex: 0,
+            explanation: "Many conversion procedures remove null productions, so the language's possible ε membership must be tracked carefully.",
+            difficulty: "application"
+          },
+          {
+            id: "cfg-q14",
+            prompt: "Which sequence is the most sensible high-level order before reaching a normal form?",
+            options: ["Remove useless, null, and unit productions, then perform the normal-form conversion", "Convert directly to a PDA, then remove terminals", "Add left recursion, then remove variables", "Build a product automaton first"],
+            correctIndex: 0,
+            explanation: "Normal-form procedures are cleaner once the obvious grammar clutter has already been removed.",
+            difficulty: "application"
+          },
+          {
+            id: "cfg-q15",
+            prompt: "A student says that CNF and GNF change the language itself because the productions look different. What is the best correction?",
+            options: ["The forms change the grammar's shape, not the intended language, aside from the usual ε caveat", "The student is correct because normal forms always shrink the language", "The student is correct because CNF recognizes only regular languages", "The correction is impossible because CNF and GNF are unrelated"],
+            correctIndex: 0,
+            explanation: "Normal forms are language-preserving restructurings designed for analysis and proofs.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "cfg-q16",
+            prompt: "Why does the rule A → aB violate strict CNF?",
+            options: ["Because terminals and variables are mixed on the same right-hand side", "Because CNF allows only terminals on the left", "Because A must appear twice", "Because CNF forbids terminals altogether"],
+            correctIndex: 0,
+            explanation: "In CNF, a terminal must appear alone on the right-hand side, not beside another variable.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "cfg-q17",
+            prompt: "If a grammar already has no useless, unit, or null productions, what additional issue might still block predictive top-down parsing?",
+            options: ["Left recursion may still remain", "The grammar is automatically regular", "The grammar must now be a TM", "All parse trees disappear"],
+            correctIndex: 0,
+            explanation: "Simplification and left-recursion elimination solve different problems, so one can remain after the other.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "cfg-q18",
+            prompt: "Why are normal forms valuable in proof-based questions?",
+            options: ["They give productions a tightly controlled shape that is easier to reason about", "They eliminate the need for grammars", "They turn every CFL into a DFA", "They guarantee unambiguity"],
+            correctIndex: 0,
+            explanation: "Uniform production shapes make induction arguments and parsing proofs more manageable.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "cfg-q19",
+            prompt: "If every production of a grammar starts with a terminal but some right-hand sides continue with variables, which form is the better match?",
+            options: ["CNF", "GNF", "Regular expression normal form", "TM transition form"],
+            correctIndex: 1,
+            explanation: "Beginning each production with a terminal is the defining GNF pattern.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "cfg-q20",
+            prompt: "Which conclusion best summarizes the topic?",
+            options: ["Simplification removes unnecessary grammar behavior, while CNF and GNF reorganize the remaining rules into standard proof-friendly shapes", "Normal forms are only drawing styles", "CNF and GNF are machine models instead of grammar forms", "Simplification is unrelated to parsing or proofs"],
+            correctIndex: 0,
+            explanation: "That statement captures the role of both cleanup and normalization in the study of CFGs.",
+            difficulty: "reasoning"
+          }
+        ]
+      };
+    </script>
+    <script src="./assets/quiz.js"></script>
+  </body>
+</html>

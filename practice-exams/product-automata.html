@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Automata Construction</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <main id="exam-root" class="site-shell"></main>
+    <script>
+      window.examData = {
+        slug: "product-automata",
+        title: "Product Automata Construction",
+        sectionNumber: "1.5",
+        summary:
+          "The product construction combines two DFAs into one DFA whose states are ordered pairs (p, q). The pair starts at the two original start states, and each input symbol updates both components at the same time. This is the standard way to prove closure of regular languages under union and intersection, because the accepting rule can be changed to require either component to accept or both components to accept.",
+        questions: [
+          {
+            id: "product-q01",
+            prompt: "In the product of DFAs M1 and M2, what form does each state of the new automaton take?",
+            options: ["An ordered pair (p, q)", "A stack symbol and a state", "A single merged state label", "A set of productions"],
+            correctIndex: 0,
+            explanation: "Product states remember one current state from each component DFA, so the natural representation is an ordered pair.",
+            difficulty: "foundational",
+            assetKey: "product-cluster-1"
+          },
+          {
+            id: "product-q02",
+            prompt: "If M1 starts in p0 and M2 starts in q0, the start state of the product machine is",
+            options: ["p0", "q0", "(p0, q0)", "the first accepting pair"],
+            correctIndex: 2,
+            explanation: "The product begins exactly where both machines begin, so the start configuration is the pair of start states.",
+            difficulty: "foundational"
+          },
+          {
+            id: "product-q03",
+            prompt: "For a product machine built to recognize L1 ∪ L2, a pair (p, q) is accepting when",
+            options: ["both p and q are accepting", "at least one of p or q is accepting", "exactly one of p or q is accepting", "neither p nor q is accepting"],
+            correctIndex: 1,
+            explanation: "Union means the combined machine should accept whenever either original machine would accept the string.",
+            difficulty: "foundational"
+          },
+          {
+            id: "product-q04",
+            prompt: "For a product machine built to recognize L1 ∩ L2, a pair (p, q) is accepting when",
+            options: ["either component is accepting", "exactly one component is accepting", "both components are accepting", "the first component is accepting"],
+            correctIndex: 2,
+            explanation: "Intersection keeps only the strings accepted by both machines, so both coordinates must be accepting.",
+            difficulty: "foundational"
+          },
+          {
+            id: "product-q05",
+            prompt: "Which closure property is most directly shown by the product construction?",
+            options: ["Closure of regular languages under union and intersection", "Closure of CFLs under complement", "Closure of Type-0 languages under ambiguity", "Closure of PDAs under output conversion"],
+            correctIndex: 0,
+            explanation: "The classic product proof shows that regular languages stay regular under union and intersection.",
+            difficulty: "foundational"
+          },
+          {
+            id: "product-q06",
+            prompt: "When the product machine reads one input symbol, what happens?",
+            options: ["Only the first component updates", "Only the second component updates", "Both components update simultaneously", "A new state is guessed nondeterministically"],
+            correctIndex: 2,
+            explanation: "The transition function applies the same symbol to both component DFAs at the same step.",
+            difficulty: "foundational"
+          },
+          {
+            id: "product-q07",
+            prompt: "Suppose the current product state is (p, q). If δ1(p, a) = p' and δ2(q, a) = q', then the product transition on a is",
+            options: ["(p', q')", "(q', p')", "{p', q'}", "(p, q)"],
+            correctIndex: 0,
+            explanation: "The product transition records the next state of each component in the same coordinate order.",
+            difficulty: "application"
+          },
+          {
+            id: "product-q08",
+            prompt: "If one of the original DFAs has 3 states and the other has 4 states, what is the largest possible number of product states?",
+            options: ["7", "12", "16", "64"],
+            correctIndex: 1,
+            explanation: "The worst case is every pair being reachable, giving 3 × 4 = 12 states.",
+            difficulty: "application"
+          },
+          {
+            id: "product-q09",
+            prompt: "In State Machine Cluster 1, Machine 1-1 starts at q0 and Machine 1-2 also starts at q0. Therefore the start state of their product is",
+            options: ["(q0, q0)", "(q1, q1)", "(q0, q2)", "(q2, q0)"],
+            correctIndex: 0,
+            explanation: "Product construction uses the start state from each component without modification.",
+            difficulty: "application"
+          },
+          {
+            id: "product-q10",
+            prompt: "From the product start state for Machine 1-1 and Machine 1-2, what happens on input b?",
+            options: ["The first component stays at q0 while the second moves to q1", "Both components move to q1", "The first moves to q1 while the second stays at q0", "Both components move to q2"],
+            correctIndex: 0,
+            explanation: "Machine 1-1 has a b-loop at q0, while Machine 1-2 leaves q0 on b toward q1.",
+            difficulty: "application"
+          },
+          {
+            id: "product-q11",
+            prompt: "From the same product start state, what happens on input a?",
+            options: ["Both components stay at q0", "The first component moves to q1 while the second stays at q0", "The first component stays at q0 while the second moves to q1", "Both components move to q2"],
+            correctIndex: 1,
+            explanation: "Machine 1-1 uses a to advance from q0 to q1, while Machine 1-2 has an a-loop at q0.",
+            difficulty: "application"
+          },
+          {
+            id: "product-q12",
+            prompt: "Why is the accepting-set rule the only part that changes between a union product and an intersection product?",
+            options: ["Because the input alphabet changes instead", "Because the state-pair transitions are the same in both constructions", "Because union uses ε-moves and intersection does not", "Because only one construction needs a start state"],
+            correctIndex: 1,
+            explanation: "The same paired transition graph works for both; the difference is only which pairs count as accepting.",
+            difficulty: "application"
+          },
+          {
+            id: "product-q13",
+            prompt: "If a pair state (p, q) is unreachable from the start pair, what is true about it?",
+            options: ["It must still remain accepting", "It can be removed without changing the recognized language", "It must be converted into a PDA state", "It always becomes the trap state"],
+            correctIndex: 1,
+            explanation: "Unreachable states never appear during any run, so removing them does not change the language.",
+            difficulty: "application"
+          },
+          {
+            id: "product-q14",
+            prompt: "Which statement best compares product construction with simply placing two DFAs side by side?",
+            options: ["The product keeps both current states at once; side-by-side drawing alone does not define combined behavior", "They are identical in every formal sense", "Only side-by-side drawing can prove closure", "The product requires a stack but side-by-side drawing does not"],
+            correctIndex: 0,
+            explanation: "The product is a formal machine that synchronizes both computations; a visual comparison alone does not.",
+            difficulty: "application"
+          },
+          {
+            id: "product-q15",
+            prompt: "Suppose a string sends the product machine to a pair whose first component is accepting and second component is not. Under which acceptance rule would the string definitely be accepted?",
+            options: ["Intersection only", "Union only", "Both union and intersection", "Neither union nor intersection"],
+            correctIndex: 1,
+            explanation: "Union needs at least one accepting component, while intersection requires both.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "product-q16",
+            prompt: "If both original DFAs recognize regular languages and you complement only the accepting set of the finished product, what language relationship are you most directly modeling?",
+            options: ["The complement of the chosen product language", "A PDA simulation", "A leftmost derivation", "A Moore output sequence"],
+            correctIndex: 0,
+            explanation: "Complementing the accepting set of a DFA changes it to recognize the complement of that DFA's language.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "product-q17",
+            prompt: "A student proposes using the accepting rule 'exactly one component accepts.' Which language operation would that describe?",
+            options: ["Intersection", "Complement", "Symmetric difference", "Concatenation"],
+            correctIndex: 2,
+            explanation: "Accepting exactly one component captures strings that are in one language but not the other, which is symmetric difference.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "product-q18",
+            prompt: "Why does product construction stay within DFA power instead of creating a stronger machine class?",
+            options: ["Because each step still reads one symbol and moves to exactly one paired state", "Because it allows λ-transitions", "Because it uses a stack behind the scenes", "Because it ignores accepting states entirely"],
+            correctIndex: 0,
+            explanation: "The combined machine remains deterministic and finite; it only expands the state space.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "product-q19",
+            prompt: "If two DFAs use different state names such as p0, p1 and q0, q1, why is pairing still unambiguous?",
+            options: ["Because the order of the pair tells which coordinate came from which machine", "Because state names are erased in the product", "Because every pair is automatically accepting", "Because the alphabet determines the machine"],
+            correctIndex: 0,
+            explanation: "The first coordinate always belongs to the first machine and the second coordinate to the second machine.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "product-q20",
+            prompt: "Which outcome best explains why product construction is useful in proofs and exam problems?",
+            options: ["It converts every regular language into a grammar immediately", "It reduces two synchronized DFA runs to one formal machine whose acceptance rule can be analyzed", "It makes DFAs nondeterministic so they are easier to draw", "It replaces the alphabet with pairs of symbols"],
+            correctIndex: 1,
+            explanation: "The product is valuable because it packages two parallel DFA computations into a single DFA that can be reasoned about cleanly.",
+            difficulty: "reasoning"
+          }
+        ]
+      };
+    </script>
+    <script src="./assets/quiz.js"></script>
+  </body>
+</html>

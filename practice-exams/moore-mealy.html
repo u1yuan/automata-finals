@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moore and Mealy Machines</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <main id="exam-root" class="site-shell"></main>
+    <script>
+      window.examData = {
+        slug: "moore-mealy",
+        title: "Moore and Mealy Machines",
+        sectionNumber: "1.6",
+        summary:
+          "Transducers extend automata by producing outputs while they read input. In a Moore machine, the output function λ maps states to outputs, so the initial state contributes an output before any input symbol is processed. In a Mealy machine, outputs are attached to transitions, so the emitted value depends on both the current state and the current input. The two models can simulate one another, but the output is recorded in different places and the sequence timing is slightly different.",
+        questions: [
+          {
+            id: "moore-q01",
+            prompt: "In a Moore machine, outputs are attached to",
+            options: ["states", "transitions", "the tape cells", "the stack alphabet"],
+            correctIndex: 0,
+            explanation: "A Moore output function maps each state to a symbol, so output belongs to states.",
+            difficulty: "foundational",
+            assetKey: "moore-cluster-5"
+          },
+          {
+            id: "moore-q02",
+            prompt: "In a Mealy machine, outputs are attached to",
+            options: ["states only", "transitions", "accepting states only", "the input alphabet as a whole"],
+            correctIndex: 1,
+            explanation: "Mealy machines place output on transitions, usually in a label such as input;output.",
+            difficulty: "foundational"
+          },
+          {
+            id: "moore-q03",
+            prompt: "Why does a Moore machine usually produce an initial output before any input is read?",
+            options: ["Because the start state already has an output value", "Because Moore machines always use λ-transitions", "Because the machine must first reject ε", "Because the alphabet begins with a blank symbol"],
+            correctIndex: 0,
+            explanation: "The run begins in a state, and that state already has a defined output.",
+            difficulty: "foundational"
+          },
+          {
+            id: "moore-q04",
+            prompt: "Which notation most naturally describes a Moore output function?",
+            options: ["λ : Q → Δ", "δ : Γ → Q", "P : V → T", "⊢ : Q × Σ → Σ*"],
+            correctIndex: 0,
+            explanation: "For Moore machines, λ takes a state in Q and returns an output symbol from Δ.",
+            difficulty: "foundational"
+          },
+          {
+            id: "moore-q05",
+            prompt: "Which label format is the usual visual clue that a transition belongs to a Mealy machine?",
+            options: ["a;1", "q2/0 written inside the state", "A → BC", "0;x,R"],
+            correctIndex: 0,
+            explanation: "Mealy diagrams typically show each edge as input;output.",
+            difficulty: "foundational"
+          },
+          {
+            id: "moore-q06",
+            prompt: "If a transducer's output depends on both the current state and the current input symbol, it is behaving like a",
+            options: ["Moore machine", "Mealy machine", "PDA", "regular grammar"],
+            correctIndex: 1,
+            explanation: "That dependence on state plus input is the defining Mealy behavior.",
+            difficulty: "foundational"
+          },
+          {
+            id: "moore-q07",
+            prompt: "In Machine 5-1, the output attached to q0 is",
+            options: ["0", "1", "a", "b"],
+            correctIndex: 1,
+            explanation: "The diagram shows the small output box 1 next to state q0.",
+            difficulty: "application"
+          },
+          {
+            id: "moore-q08",
+            prompt: "In Machine 5-1, which pair of states share the same output value 0?",
+            options: ["q0 and q3", "q1 and q2", "q0 and q2", "q1 and q3"],
+            correctIndex: 1,
+            explanation: "The state-output boxes in Machine 5-1 mark q1 and q2 with 0.",
+            difficulty: "application"
+          },
+          {
+            id: "moore-q09",
+            prompt: "What is the main timing difference between a Moore output string and the corresponding Mealy output string for the same behavior?",
+            options: ["The Moore string is usually offset by one output symbol", "The Mealy string must be twice as long", "The Moore string contains no zeros", "The Mealy string cannot start at the initial state"],
+            correctIndex: 0,
+            explanation: "Moore output includes the initial state's symbol before the first input is consumed.",
+            difficulty: "application"
+          },
+          {
+            id: "moore-q10",
+            prompt: "Why can converting a Mealy machine to a Moore machine increase the number of states?",
+            options: ["Because one Moore state may be needed for each distinct incoming output behavior", "Because Moore machines must add a stack", "Because every state splits by input alphabet size automatically", "Because Moore machines require separate reject tapes"],
+            correctIndex: 0,
+            explanation: "Different transition outputs entering what was one state may need separate Moore states so the correct output is available on entry.",
+            difficulty: "application"
+          },
+          {
+            id: "moore-q11",
+            prompt: "In State Machine Cluster 6, the label a;0 on an edge means",
+            options: ["read a, output 0", "read 0, output a", "move to state a0", "push a then pop 0"],
+            correctIndex: 0,
+            explanation: "Mealy labels list the consumed input first and the emitted output second.",
+            difficulty: "application",
+            assetKey: "mealy-cluster-6"
+          },
+          {
+            id: "moore-q12",
+            prompt: "If a Mealy machine remains in the same state on an input but changes the output value depending on that input, which model feature makes that possible?",
+            options: ["Outputs are attached to transitions rather than states", "Outputs are attached only to the start state", "Acceptance is by empty stack", "The machine uses left recursion"],
+            correctIndex: 0,
+            explanation: "A Mealy edge can vary output even when the destination state does not change.",
+            difficulty: "application"
+          },
+          {
+            id: "moore-q13",
+            prompt: "Which statement best distinguishes Machine 5-1 from Machine 6-1?",
+            options: ["Machine 5-1 stores output in states, while Machine 6-1 stores output on edges", "Machine 5-1 is nondeterministic, while Machine 6-1 is a grammar", "Machine 5-1 uses a stack, while Machine 6-1 does not", "Machine 5-1 recognizes a CFL, while Machine 6-1 recognizes a regular language"],
+            correctIndex: 0,
+            explanation: "That visual placement of outputs is the key Moore-versus-Mealy distinction between the two clusters.",
+            difficulty: "application"
+          },
+          {
+            id: "moore-q14",
+            prompt: "A designer wants outputs to change only after a state is fully entered and stabilized. Which model is usually more natural?",
+            options: ["Moore", "Mealy", "PDA", "NFA"],
+            correctIndex: 0,
+            explanation: "Moore outputs are state-based, so they are often easier to associate with stable states.",
+            difficulty: "application"
+          },
+          {
+            id: "moore-q15",
+            prompt: "Suppose a Moore machine starts in q0 with λ(q0) = 1 and then follows transitions into states with outputs 0 and 1. Which description is correct?",
+            options: ["The produced string begins with 1 before the first input-driven move", "The first 1 is suppressed until the first transition", "The machine cannot emit 1 from the start state", "The output length must be shorter than the input length"],
+            correctIndex: 0,
+            explanation: "Moore output starts with the initial state's symbol, so the sequence begins before any transition is taken.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "moore-q16",
+            prompt: "If two different transitions entering state q2 of a Mealy machine output 0 and 1 respectively, what problem appears when trying to use a single Moore state for q2?",
+            options: ["One Moore state cannot represent two different entry outputs at the same moment", "Moore states cannot have incoming transitions", "The input alphabet disappears", "The machine becomes context-free"],
+            correctIndex: 0,
+            explanation: "A Moore state has only one output label, so conflicting incoming outputs often force the state to split.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "moore-q17",
+            prompt: "Why can a Mealy machine sometimes use fewer states than an equivalent Moore machine?",
+            options: ["Because outputs can be encoded on edges without duplicating destination states", "Because Mealy machines ignore the start state", "Because Moore machines are nondeterministic", "Because Mealy machines can move left on the tape"],
+            correctIndex: 0,
+            explanation: "Transition-based output can avoid the extra state duplication needed by Moore conversion.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "moore-q18",
+            prompt: "A student says 'Moore and Mealy machines recognize different language classes.' What is the best response?",
+            options: ["Correct, because one is regular and the other is context-free", "Incorrect, because they are both finite-state transducers and the main difference is output placement", "Correct, because Moore machines need a stack", "Incorrect, because Mealy machines are just Turing machines with labels"],
+            correctIndex: 1,
+            explanation: "The distinction is about how output is produced, not about moving to a stronger automaton class.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "moore-q19",
+            prompt: "If a transducer must react immediately to an input symbol with no extra output offset, which model often gives the direct design?",
+            options: ["Moore", "Mealy", "CNF grammar", "PDA by empty stack"],
+            correctIndex: 1,
+            explanation: "Mealy outputs occur on the same transition that reads the input, so the response is immediate.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "moore-q20",
+            prompt: "Which conclusion best captures the relationship between the two models on an exam?",
+            options: ["They are unrelated because one has output and the other does not", "They are behaviorally convertible, but the conversion changes where outputs are recorded and may change the state count", "They are identical diagrams with different names only", "They can be converted only if the alphabet is unary"],
+            correctIndex: 1,
+            explanation: "Moore and Mealy machines can simulate one another, but the encoding of output and the number of states may change.",
+            difficulty: "reasoning"
+          }
+        ]
+      };
+    </script>
+    <script src="./assets/quiz.js"></script>
+  </body>
+</html>

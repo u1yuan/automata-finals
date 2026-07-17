@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chomsky Hierarchy and Grammars</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <main id="exam-root" class="site-shell"></main>
+    <script>
+      window.examData = {
+        slug: "chomsky-grammars",
+        title: "Chomsky Hierarchy and Grammars",
+        sectionNumber: "1.7",
+        summary:
+          "The Chomsky hierarchy orders grammar families from the most restricted Type-3 regular grammars up to the most general Type-0 grammars. Regular grammars correspond to finite automata, context-free grammars correspond to pushdown automata, and Type-0 grammars correspond to Turing machines. A CFG is written as G = (V, T, S, P), and key ideas in this section include productions, leftmost and rightmost derivations, parse trees, and ambiguity.",
+        questions: [
+          {
+            id: "chomsky-q01",
+            prompt: "A context-free grammar is commonly written as",
+            options: ["G = (V, T, S, P)", "G = (Q, Σ, δ, q0)", "G = (Γ, b, F, R)", "G = (N, D, H, M)"],
+            correctIndex: 0,
+            explanation: "The standard CFG tuple uses variables V, terminals T, start symbol S, and productions P.",
+            difficulty: "foundational"
+          },
+          {
+            id: "chomsky-q02",
+            prompt: "In the tuple G = (V, T, S, P), the symbol T denotes",
+            options: ["transitions", "terminals", "tape symbols", "tree levels"],
+            correctIndex: 1,
+            explanation: "T is the set of terminal symbols that appear in generated strings.",
+            difficulty: "foundational"
+          },
+          {
+            id: "chomsky-q03",
+            prompt: "Which machine model is the standard recognizer for context-free languages?",
+            options: ["DFA", "PDA", "Moore machine", "two-state transducer"],
+            correctIndex: 1,
+            explanation: "Context-free languages correspond to pushdown automata in the hierarchy.",
+            difficulty: "foundational"
+          },
+          {
+            id: "chomsky-q04",
+            prompt: "Which machine class corresponds to Type-0 grammars?",
+            options: ["finite automata", "pushdown automata", "Turing machines", "Mealy machines"],
+            correctIndex: 2,
+            explanation: "Type-0 grammars are associated with the most powerful standard model in the course: Turing machines.",
+            difficulty: "foundational"
+          },
+          {
+            id: "chomsky-q05",
+            prompt: "A parse tree is used mainly to show",
+            options: ["the stack alphabet of a PDA", "how a string is derived from grammar productions", "the tape movement of a TM", "the product states of two DFAs"],
+            correctIndex: 1,
+            explanation: "Parse trees visualize the derivation structure created by grammar rules.",
+            difficulty: "foundational"
+          },
+          {
+            id: "chomsky-q06",
+            prompt: "In a leftmost derivation, each step rewrites",
+            options: ["the longest terminal", "the leftmost remaining variable", "the deepest parse-tree leaf only", "every variable at once"],
+            correctIndex: 1,
+            explanation: "The defining rule of a leftmost derivation is that the leftmost nonterminal is expanded at each step.",
+            difficulty: "foundational"
+          },
+          {
+            id: "chomsky-q07",
+            prompt: "Which ordering of grammar types goes from most restricted to most general?",
+            options: ["Type-0, Type-1, Type-2, Type-3", "Type-3, Type-2, Type-1, Type-0", "Type-2, Type-3, Type-1, Type-0", "Type-1, Type-0, Type-3, Type-2"],
+            correctIndex: 1,
+            explanation: "The hierarchy rises from regular to context-free to context-sensitive to unrestricted.",
+            difficulty: "application"
+          },
+          {
+            id: "chomsky-q08",
+            prompt: "Why is every regular language also context-free?",
+            options: ["Because Type-3 is contained in Type-2", "Because every PDA is contained in every DFA", "Because ambiguity disappears at Type-2", "Because Turing machines are weaker than PDAs"],
+            correctIndex: 0,
+            explanation: "The hierarchy is inclusive upward, so the more restrictive regular class sits inside the context-free class.",
+            difficulty: "application"
+          },
+          {
+            id: "chomsky-q09",
+            prompt: "If a grammar can generate nested matching patterns such as balanced parentheses, which class is the best first fit?",
+            options: ["regular", "context-free", "Moore", "finite transducer"],
+            correctIndex: 1,
+            explanation: "Nested matching is the classic example of context-free structure.",
+            difficulty: "application"
+          },
+          {
+            id: "chomsky-q10",
+            prompt: "Which set contains symbols that may still be rewritten during a derivation?",
+            options: ["T", "V", "Δ", "Γ only"],
+            correctIndex: 1,
+            explanation: "Variables, also called nonterminals, are the symbols that productions replace.",
+            difficulty: "application"
+          },
+          {
+            id: "chomsky-q11",
+            prompt: "If two different parse trees generate the same string from the same grammar, the grammar is",
+            options: ["deterministic", "ambiguous", "in CNF automatically", "not context-free"],
+            correctIndex: 1,
+            explanation: "Multiple parse trees for one string are exactly what ambiguity means.",
+            difficulty: "application"
+          },
+          {
+            id: "chomsky-q12",
+            prompt: "Which production is valid in a CFG?",
+            options: ["A → aB", "ab → A", "Aq → b", "00 → 11"],
+            correctIndex: 0,
+            explanation: "In a CFG, the left side of a production is a single variable, and the right side may mix terminals and variables.",
+            difficulty: "application"
+          },
+          {
+            id: "chomsky-q13",
+            prompt: "What is the practical difference between a leftmost derivation and a rightmost derivation for an unambiguous grammar?",
+            options: ["They can still describe the same parse tree in a different expansion order", "One generates terminals while the other does not", "Only leftmost derivations belong to CFGs", "Rightmost derivations require Type-0 grammars"],
+            correctIndex: 0,
+            explanation: "The order of expansion may differ even when the underlying parse structure is the same.",
+            difficulty: "application"
+          },
+          {
+            id: "chomsky-q14",
+            prompt: "Which pair is matched correctly?",
+            options: ["regular grammar ↔ PDA", "context-free grammar ↔ finite automaton", "Type-0 grammar ↔ Turing machine", "Moore machine ↔ context-sensitive grammar"],
+            correctIndex: 2,
+            explanation: "Type-0 grammars correspond to Turing machines in the standard hierarchy mapping.",
+            difficulty: "application"
+          },
+          {
+            id: "chomsky-q15",
+            prompt: "A student claims that every language with repetition is nonregular. Which counterpoint is strongest?",
+            options: ["Some repeated-pattern languages are regular, such as strings ending in aa", "Repetition only occurs in Type-0 languages", "Regular languages never use terminals twice", "Any repeated symbol forces a stack"],
+            correctIndex: 0,
+            explanation: "Simple repeated endings or substrings can still be described by regular expressions and DFAs.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "chomsky-q16",
+            prompt: "Why are parse trees important when discussing ambiguity instead of just listing derivation steps?",
+            options: ["Because ambiguity is about structural meaning, not only derivation order", "Because parse trees remove terminals", "Because derivations are not allowed in CFGs", "Because parse trees are required only for Type-0 grammars"],
+            correctIndex: 0,
+            explanation: "Two derivations might differ only in order, but two distinct parse trees show genuine structural ambiguity.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "chomsky-q17",
+            prompt: "If a language is recognized by a PDA, which statement is always safe?",
+            options: ["It is at least context-free", "It must be regular", "It must be Type-3 only", "It cannot be generated by a grammar"],
+            correctIndex: 0,
+            explanation: "PDAs recognize context-free languages, so PDA recognition guarantees membership in the CFL class.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "chomsky-q18",
+            prompt: "Why does the hierarchy matter in proofs and exam questions?",
+            options: ["It helps determine what kind of grammar or machine is strong enough to model a language", "It gives numeric state counts for every DFA", "It removes the need for derivations", "It guarantees every grammar is unambiguous"],
+            correctIndex: 0,
+            explanation: "The hierarchy provides a power comparison that guides which formal model is appropriate.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "chomsky-q19",
+            prompt: "Suppose a language is shown to be nonregular but is generated by a CFG. Where does it sit most naturally?",
+            options: ["Between Type-3 and Type-2, namely in the context-free class but outside the regular class", "Outside the Chomsky hierarchy", "In the Moore-machine class only", "In Type-3 only"],
+            correctIndex: 0,
+            explanation: "That description matches a language that needs context-free power but not just regular power.",
+            difficulty: "reasoning"
+          },
+          {
+            id: "chomsky-q20",
+            prompt: "Which statement best summarizes the relationship among grammars, derivations, and machines in this topic?",
+            options: ["Grammars generate strings, derivations explain the generation process, and machine classes mirror grammar power at each hierarchy level", "Machines replace grammars entirely", "Only grammars matter because machines do not recognize languages", "Derivations are unrelated to parse trees"],
+            correctIndex: 0,
+            explanation: "That summary captures why the section studies both grammar notation and the corresponding automata classes together.",
+            difficulty: "reasoning"
+          }
+        ]
+      };
+    </script>
+    <script src="./assets/quiz.js"></script>
+  </body>
+</html>

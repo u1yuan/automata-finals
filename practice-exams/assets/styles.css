@@ -1,0 +1,457 @@
+:root {
+  --paper: #f6f2e8;
+  --paper-strong: #efe7d6;
+  --ink: #1d2730;
+  --muted: #5f6a72;
+  --accent: #8f3d2e;
+  --accent-soft: #d7b38a;
+  --line: rgba(29, 39, 48, 0.14);
+  --card: rgba(255, 252, 246, 0.92);
+  --correct: #235c36;
+  --incorrect: #8b3026;
+  --focus: #114f8d;
+  --shadow: 0 18px 50px rgba(27, 33, 39, 0.1);
+  --max-width: 1080px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(143, 61, 46, 0.08), transparent 22%),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 35px,
+      rgba(29, 39, 48, 0.045) 35px,
+      rgba(29, 39, 48, 0.045) 36px
+    ),
+    var(--paper);
+  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  line-height: 1.55;
+}
+
+a {
+  color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.site-shell {
+  width: min(calc(100% - 2rem), var(--max-width));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.site-banner,
+.page-banner {
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(239, 231, 214, 0.92));
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.site-banner::before,
+.page-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top right, rgba(143, 61, 46, 0.14), transparent 34%),
+    linear-gradient(90deg, rgba(143, 61, 46, 0.12), transparent 20%);
+  pointer-events: none;
+}
+
+.site-banner,
+.page-banner,
+.exam-card,
+.question-card,
+.result-panel {
+  border-radius: 18px;
+}
+
+.site-banner {
+  padding: 2.2rem;
+  margin-bottom: 1.75rem;
+}
+
+.course-kicker {
+  margin: 0 0 0.45rem;
+  font: 700 0.92rem/1.2 "Trebuchet MS", "Gill Sans", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.site-title,
+.page-title {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3.25rem);
+  line-height: 1.05;
+}
+
+.site-intro,
+.page-summary,
+.index-note {
+  max-width: 52rem;
+  color: var(--muted);
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.exam-card,
+.question-card,
+.result-panel,
+.page-banner,
+.exam-toolbar {
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.exam-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.2rem;
+}
+
+.exam-card h2,
+.question-card h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.exam-meta,
+.question-meta,
+.result-meta,
+.mini-link {
+  font: 600 0.88rem/1.3 "Trebuchet MS", "Gill Sans", sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.exam-meta,
+.question-meta {
+  color: var(--accent);
+}
+
+.exam-card p,
+.question-card p,
+.result-panel p {
+  margin: 0;
+}
+
+.launch-link,
+.toolbar-button,
+.check-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.7rem 1.15rem;
+  font: 700 0.95rem/1 "Trebuchet MS", "Gill Sans", sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 140ms ease, background-color 140ms ease, border-color 140ms ease;
+}
+
+.launch-link,
+.toolbar-button.primary,
+.check-button {
+  background: var(--ink);
+  color: #fffaf2;
+}
+
+.toolbar-button.secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.launch-link:hover,
+.toolbar-button:hover,
+.check-button:hover {
+  transform: translateY(-1px);
+}
+
+.page-banner {
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+
+.page-header-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.back-link {
+  font: 700 0.88rem/1.2 "Trebuchet MS", "Gill Sans", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.page-section-label {
+  margin: 0.3rem 0 0;
+  font: 700 0.9rem/1.3 "Trebuchet MS", "Gill Sans", sans-serif;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.exam-toolbar {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.toolbar-copy {
+  max-width: 38rem;
+}
+
+.toolbar-copy p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.question-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.question-card {
+  padding: 1.2rem;
+}
+
+.question-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.8rem;
+}
+
+.difficulty-pill {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  color: var(--muted);
+}
+
+.question-prompt {
+  margin-bottom: 0.85rem;
+  font-size: 1.04rem;
+}
+
+.asset-figure {
+  margin: 0 0 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.asset-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.asset-figure figcaption {
+  padding: 0.75rem 0.95rem;
+  border-top: 1px solid var(--line);
+  background: rgba(239, 231, 214, 0.45);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.option-list {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 0;
+}
+
+.option-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.option-item input {
+  margin-top: 0.2rem;
+}
+
+.option-label {
+  font-weight: 700;
+  margin-right: 0.25rem;
+}
+
+.feedback {
+  display: none;
+  margin-top: 0.9rem;
+  padding: 0.9rem 1rem;
+  border-left: 4px solid var(--line);
+  border-radius: 0 12px 12px 0;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.feedback.is-visible {
+  display: block;
+}
+
+.feedback.correct {
+  border-left-color: var(--correct);
+}
+
+.feedback.incorrect {
+  border-left-color: var(--incorrect);
+}
+
+.feedback-status {
+  margin: 0 0 0.25rem;
+  font-weight: 700;
+}
+
+.feedback.correct .feedback-status {
+  color: var(--correct);
+}
+
+.feedback.incorrect .feedback-status {
+  color: var(--incorrect);
+}
+
+.result-panel {
+  display: none;
+  margin-top: 1rem;
+  padding: 1.2rem;
+}
+
+.result-panel.is-visible {
+  display: block;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+  margin: 1rem 0;
+}
+
+.result-box {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.9rem;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.result-box strong {
+  display: block;
+  font-size: 1.7rem;
+}
+
+.missed-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.8rem;
+}
+
+.missed-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(239, 231, 214, 0.55);
+  text-decoration: none;
+  font: 700 0.9rem/1 "Trebuchet MS", "Gill Sans", sans-serif;
+}
+
+.footer-note {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 720px) {
+  .site-shell {
+    width: min(calc(100% - 1rem), var(--max-width));
+    padding-top: 1rem;
+  }
+
+  .site-banner,
+  .page-banner,
+  .question-card,
+  .exam-toolbar,
+  .result-panel {
+    border-radius: 14px;
+  }
+
+  .site-banner,
+  .page-banner,
+  .question-card {
+    padding: 1rem;
+  }
+
+  .page-header-top,
+  .exam-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .launch-link,
+  .toolbar-button,
+  .check-button {
+    transition: none;
+  }
+}
